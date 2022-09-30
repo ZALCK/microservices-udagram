@@ -16,4 +16,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - run: echo "Hello world, it is my first CI with git actions"
+    - run: docker-compose -f docker-compose-build.yaml build --parallel
+    - run: docker tag reverseproxy zalck/reverseproxy:v1
+    - run: docker tag udagram-api-user zalck/udagram-api-user:v1
+    - run: docker tag udagram-api-feed zalck/udagram-api-feed:v1
+    - run: docker tag udagram-frontend:local zalck/udagram-frontend:v1
+    - run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+    - run: docker push zalck/reverseproxy:v1
+    - run: docker push zalck/udagram-api-user:v1
+    - run: docker push zalck/udagram-api-feed:v1
+    - run: docker push zalck/udagram-frontend:v1
