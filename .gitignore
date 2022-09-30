@@ -41,5 +41,6 @@ venv/
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 
-#  Eclusion rule for Environement variables script shell
-set_env.sh
+#  Eclusion rule for shell scripts
+*.sh
+*.yml
